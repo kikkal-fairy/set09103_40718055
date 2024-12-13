@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat | StudyBee</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #FFF9E5, #FFD54F);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .chat-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #FFC107;
+            color: #212529;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid #FFC107;
+            border-radius: 10px;
+            background-color: #FFF9E5;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message .sender {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .message-bubble {
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 70%;
+            font-size: 14px;
+        }
+
+        .message-bot {
+            background-color: #FFC107;
+            color: #212529;
+        }
+
+        .message-user {
+            background-color: #FFD54F;
+            color: #212529;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-container input {
+            flex: 1;
+            border: 1px solid #FFC107;
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .chat-input-container button {
+            background-color: #FFC107;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: #212529;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .chat-input-container button:hover {
+            background-color: #FFA000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to bottom right, #FFC107, #FFD54F);">
+    <div class="container">
+        <!-- Styled Brand Name as Logo with More Distinction -->
+        <a class="navbar-brand" href="{{ url_for('home') }}" style="font-family: 'Pacifico', cursive; font-size: 2.2rem; color: #212529; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+            <span style="color: #212529; font-weight: bold;">Study</span>
+            <span style="color: #FF6F00; font-weight: bold;">Bee</span>
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Navbar Items with Hover Effect -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'home' %}active{% endif %}" href="{{ url_for('home') }}" style="font-weight: bold; color: #212529;">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'features' %}active{% endif %}" href="{{ url_for('features') }}" style="font-weight: bold; color: #212529;">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'groups' %}active{% endif %}" href="{{ url_for('groups') }}" style="font-weight: bold; color: #212529;">
+                        Groups
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'library' %}active{% endif %}" href="{{ url_for('library') }}" style="font-weight: bold; color: #212529;">
+                        Library
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about') }}" style="font-weight: bold; color: #212529;">
+                        About
+                    </a>
+                </li>
+
+                <!-- User Dropdown (If Logged In) -->
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #212529; font-weight: bold;">
+                            <i class="fas fa-user"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Login and Sign Up Buttons (If Not Logged In) -->
+                    <li class="nav-item">
+                        <a class="nav-link btn text-white px-3" href="{{ url_for('login') }}" style="background-color: #212529; border-radius: 30px; font-weight: bold; transition: all 0.3s ease;">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light text-dark px-3 ms-2" href="{{ url_for('register') }}" style="border-radius: 30px; font-weight: bold; transition: all 0.3s ease;">
+                            Sign Up
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <div class="chat-container">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div>StudyBee Group Chat</div>
+            <div id="onlineUsers">Online Users: <span id="onlineCount">0</span></div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="Type your message here...">
+            <button id="sendMessage">Send</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+    <!-- Load Socket.IO from CDN -->
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
+    <script>
+        const socket = io(); // Initialize Socket.IO
+
+        const chatMessages = document.getElementById("chatMessages");
+        const chatInput = document.getElementById("chatInput");
+        const sendMessageButton = document.getElementById("sendMessage");
+        const onlineCount = document.getElementById("onlineCount");
+
+        // Add message to chat
+        function addMessage(sender, text, isUser = false) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+            if (isUser) messageDiv.classList.add("user");
+
+            const senderSpan = document.createElement("span");
+            senderSpan.classList.add("sender");
+            senderSpan.textContent = `${sender}: `;
+
+            const messageBubble = document.createElement("div");
+            messageBubble.classList.add("message-bubble");
+            messageBubble.classList.add(isUser ? "message-user" : "message-bot");
+            messageBubble.textContent = text;
+
+            messageDiv.appendChild(senderSpan);
+            messageDiv.appendChild(messageBubble);
+            chatMessages.appendChild(messageDiv);
+
+            // Scroll to the bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send message to server
+        sendMessageButton.addEventListener("click", () => {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Emit message to server
+            socket.emit("chatMessage", message);
+
+            addMessage("You", message, true); // Add user message locally
+            chatInput.value = ""; // Clear input
+        });
+
+        // Press Enter to send
+        chatInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessageButton.click();
+        });
+
+        // Listen for incoming messages
+        socket.on("message", ({ sender, text }) => {
+            addMessage(sender, text);
+        });
+
+        // Update online users count
+        socket.on("onlineUsers", (count) => {
+            onlineCount.textContent = count;
+        });
+    </script>
+</body>
+</html>
