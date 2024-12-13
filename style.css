@@ -1,0 +1,310 @@
+/* === General Styles === */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFF9E5; /* Light honeycomb background */
+    color: #212529; /* Deep black */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* === Header Styling === */
+header {
+    background-color: #FFC107; /* Bright golden yellow */
+    color: #212529;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header a {
+    color: #212529;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #FFA000; /* Darker yellow on hover */
+}
+
+/* === Navbar Styling === */
+.navbar {
+    background-color: #212529; /* Deep black */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #FFC107 !important; /* Bright yellow */
+}
+
+.navbar-brand:hover {
+    color: #FFB300 !important; /* Slightly darker yellow */
+}
+
+.navbar-nav .nav-link {
+    color: #FFF9E5 !important; /* Light honey yellow */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FFC107 !important;
+    text-decoration: underline;
+}
+
+/* Mobile-specific navbar menu */
+#navbar-menu {
+    display: none;
+    background-color: #212529;
+    padding: 1rem;
+}
+
+.navbar-nav .nav-link-mobile {
+    display: block;
+    padding: 0.5rem 0;
+    color: #FFF9E5;
+}
+
+.navbar-nav .nav-link-mobile:hover {
+    color: #FFC107;
+}
+
+/* === Footer Styling === */
+footer {
+    background-color: #212529; /* Deep black */
+    color: #FFF9E5; /* Honey yellow text */
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #FFC107;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: #FFB300;
+}
+
+/* === Button Styling === */
+.btn-primary {
+    background-color: #FFC107; /* Bright yellow */
+    color: #212529; /* Black text */
+    border: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #FFA000; /* Darker yellow */
+    color: #FFFFFF; /* White text */
+}
+
+/* === Form Styling === */
+.form-control {
+    border: 1px solid #FFC107; /* Yellow border */
+    border-radius: 0.25rem;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #FFA000; /* Darker yellow on focus */
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+label {
+    font-weight: bold;
+    color: #212529;
+}
+
+/* === Card Styling === */
+.card {
+    border: 1px solid #FFC107; /* Yellow border */
+    border-radius: 0.5rem;
+    background-color: #FFF9E5; /* Honeycomb background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #FFC107; /* Yellow header */
+    color: #212529; /* Black text */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-body {
+    background-color: #FFF9E5; /* Honey yellow */
+    color: #212529;
+}
+
+/* === Table Styling === */
+.table th {
+    background-color: #FFC107; /* Bright yellow header */
+    color: #212529; /* Black text */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table td {
+    background-color: #FFF9E5; /* Honey yellow */
+    color: #212529;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #FFECB3; /* Pale yellow on hover */
+}
+
+/* === Bee Logo Styling === */
+.bee-logo {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* === Alerts === */
+.alert-primary {
+    background-color: #FFC107; /* Bright yellow */
+    color: #212529; /* Black text */
+    border-color: #FFB300;
+}
+
+.alert-secondary {
+    background-color: #212529; /* Black background */
+    color: #FFF9E5; /* Honey yellow text */
+    border-color: #333333;
+}
+
+/* === Honeycomb Divider === */
+.honeycomb-divider {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: repeating-linear-gradient(
+        45deg,
+        #FFC107,
+        #FFC107 10px,
+        #FFF9E5 10px,
+        #FFF9E5 20px
+    );
+    margin: 1rem 0;
+}
+
+/* === Chat Box Styling === */
+#chat-box {
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem;
+    border: 1px solid #FFC107; /* Yellow border */
+    border-radius: 0.5rem;
+    background-color: #FFF9E5; /* Honeycomb background */
+    height: 400px; /* Default height for desktop */
+    overflow-y: auto;
+}
+
+.chat-message {
+    padding: 0.5rem;
+    border-bottom: 1px solid #FFC107;
+}
+
+.chat-message:last-child {
+    border-bottom: none;
+}
+
+/* === Utility Classes === */
+.bg-honey {
+    background-color: #FFF9E5; /* Honeycomb yellow */
+}
+
+.text-honey {
+    color: #FFC107; /* Bright yellow text */
+}
+
+.text-dark {
+    color: #212529; /* Deep black */
+}
+
+.bg-dark {
+    background-color: #212529; /* Black background */
+}
+
+.text-light {
+    color: #FFF9E5; /* Honey yellow */
+}
+
+/* === Responsive Design === */
+@media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    #navbar-menu {
+        display: block;
+    }
+
+    #chat-box {
+        height: 200px; /* Reduce height for mobile */
+    }
+
+    footer {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        font-size: 16px;
+    }
+
+    .navbar {
+        padding: 0.75rem;
+    }
+
+    #chat-box {
+        height: 300px; /* Adjust height for tablets */
+    }
+
+    footer {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        font-size: 18px;
+    }
+
+    .navbar {
+        padding: 1rem;
+    }
+
+    #chat-box {
+        height: 400px; /* Standard height for desktop */
+    }
+
+    footer {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* === Smooth Scroll === */
+html {
+    scroll-behavior: smooth;
+}
