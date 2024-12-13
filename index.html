@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBee | Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFF9E5;
+        }
+
+        .hero {
+            background: linear-gradient(to bottom right, #FFC107, #FFD54F);
+            color: #212529;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeInUp 2.5s ease;
+        }
+
+        .hero-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .features,
+        .community,
+        .faq-section,
+        .testimonials {
+            padding: 3rem 0;
+        }
+
+        .feature-card {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: #FFC107;
+            margin-bottom: 1rem;
+        }
+
+         /* Real-Time Chat Widget */
+         .real-time-chat {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #FFF9E5;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .real-time-chat-header {
+            background: #FFC107;
+            color: #212529;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .language-selector {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .language-selector select {
+            padding: 5px 10px;
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            background-color: #FFFFFF;
+        }
+
+        .real-time-chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border-top: 1px solid #FFD54F;
+            border-bottom: 1px solid #FFD54F;
+            background: #FFFFFF;
+        }
+
+        .real-time-chat-messages p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .bot-message {
+            background: #FFC107;
+            color: #212529;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .user-message {
+            background: #E3F2FD;
+            color: #212529;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-style: italic;
+        }
+
+        .real-time-chat-input {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            background: #FFF9E5;
+        }
+
+        .real-time-chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .real-time-chat-input button {
+            padding: 10px 20px;
+            background: #FFC107;
+            border: none;
+            color: #212529;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .real-time-chat-input button:hover {
+            background: #FFA000;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .real-time-chat {
+                width: 90%;
+            }
+
+            .real-time-chat-header {
+                font-size: 1.2rem;
+            }
+
+            .real-time-chat-input input {
+                font-size: 0.8rem;
+            }
+
+            .real-time-chat-input button {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .real-time-chat {
+                width: 90%;
+            }
+
+            .real-time-chat-header {
+                font-size: 1.2rem;
+            }
+
+            .real-time-chat-input input {
+                font-size: 0.8rem;
+            }
+
+            .real-time-chat-input button {
+                font-size: 0.8rem;
+            }
+        }
+
+        .cta {
+            background: linear-gradient(to right, #FFC107, #FFA000);
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+   <!-- Navbar -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(to bottom right, #FFC107, #FFD54F); padding: 1rem 1.5rem; transition: all 0.5s ease;">
+    <div class="container-fluid">
+        <!-- Animated Brand Name as Logo with More Distinction -->
+        <a class="navbar-brand d-flex align-items-center logo-hover" href="{{ url_for('home') }}" style="font-family: 'Pacifico', cursive; font-size: 2.5rem;">
+            <span class="text-dark fw-bold me-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">Study</span>
+            <span class="fw-bold" style="color: #FF3D00; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);">Bee</span>
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center gap-3">
+                <!-- Navbar Items with Hover Effect, Active State, and Spacing -->
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'home' %}active text-decoration-underline{% endif %}" href="{{ url_for('home') }}">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'features' %}active text-decoration-underline{% endif %}" href="{{ url_for('features') }}">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'groups' %}active text-decoration-underline{% endif %}" href="{{ url_for('groups') }}">
+                        Groups
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'library' %}active text-decoration-underline{% endif %}" href="{{ url_for('library') }}">
+                        Library
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'about' %}active text-decoration-underline{% endif %}" href="{{ url_for('about') }}">
+                        About
+                    </a>
+                </li>
+
+                <!-- User Dropdown (If Logged In) -->
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-bold d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Login and Sign Up Buttons (If Not Logged In) -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-dark px-4 py-2 me-2 rounded-pill text-white fw-bold hover-shadow" href="{{ url_for('login') }}" style="transition: all 0.3s ease;">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light px-4 py-2 rounded-pill fw-bold shadow-sm hover-shadow" href="{{ url_for('register') }}" style="transition: all 0.3s ease;">
+                            Sign Up
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Additional CSS for Improved Contrast, Hover Enhancements, and Animation -->
+<style>
+    /* Navbar Link Color and Hover Effect */
+    .navbar-nav .nav-link {
+        color: #212529; /* Dark text for better contrast */
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #FF6F00; /* Bright orange color for hover */
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow on hover */
+        background-color: rgba(255, 111, 0, 0.1); /* Soft background highlight */
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Active Link Styling */
+    .navbar-nav .nav-link.active {
+        color: #FF6F00; /* Use the bee-themed orange for the active link */
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: rgba(255, 111, 0, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Animated Brand Logo Hover */
+    .logo-hover:hover {
+        transform: rotate(-3deg) scale(1.1);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* Sticky Navbar Shadow on Scroll */
+    .navbar-scrolled {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    /* Hover effect for Login and Sign-Up buttons */
+    .hover-shadow:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+
+<!-- JavaScript for Additional Navbar Features -->
+<script>
+    // Make navbar sticky on scroll and add shadow
+    window.onscroll = function() {
+        let navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('navbar-scrolled');
+        } else {
+            navbar.classList.remove('navbar-scrolled');
+        }
+    };
+
+    // Smooth scrolling for links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.hash !== "") {
+                e.preventDefault();
+                const target = document.querySelector(this.hash);
+                window.scroll({
+                    top: target.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Close the mobile navbar when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                bootstrap.Collapse.getInstance(navbarCollapse).hide();
+            }
+        });
+    });
+</script>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-animation">
+            <img src="https://cdn.pixabay.com/photo/2016/03/21/23/25/bee-1276109_1280.png" alt="Bee Animation" class="w-25 position-absolute animate__animated animate__bounceIn">
+        </div>
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="container">
+                <h1>Welcome to StudyBee</h1>
+                <p>Your ultimate platform for collaborative learning and academic success.</p>
+                <button class="btn btn-dark btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</button>
+                <button class="btn btn-outline-light btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+            </div>
+        </div>
+    </section>
+ <!-- Real-Time Chat Widget -->
+ <section class="real-time-chat">
+    <div class="real-time-chat-header">
+        Real-Time Chat & Support
+    </div>
+
+    <!-- Language Selector inside the chat -->
+    <div class="language-selector">
+        <label for="languageSelector" class="form-label">Language:</label>
+        <select id="languageSelector" class="form-select w-auto">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+        </select>
+    </div>
+
+    <div class="real-time-chat-messages" id="chatMessages">
+        <p class="bot-message">StudyBee Bot: Welcome to the StudyBee Real-Time Chat! Ask me anything or type "FAQs" for common questions.</p>
+    </div>
+    <div class="real-time-chat-input">
+        <input type="text" id="chatInput" class="form-control" placeholder="Type your message here...">
+        <button class="btn btn-primary" id="sendMessage">Send</button>
+    </div>
+</section>
+
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose StudyBee?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Collaborative Groups</h4>
+                        <p>Join study groups and collaborate with like-minded peers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Study Resources</h4>
+                        <p>Access a library of shared notes and study materials.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Event Planning</h4>
+                        <p>Schedule study sessions and stay on track with your goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Community Section -->
+<section class="community">
+    <div class="container">
+        <h2 class="text-center mb-5">Be Part of the Community</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="community-card">
+                    <h4>Community Forums</h4>
+                    <p>Engage with other students in forums to share knowledge and ask questions.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="community-card">
+                    <h4>Social Learning Events</h4>
+                    <p>Participate in events and webinars to gain new insights and expand your learning network.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQs Section -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true" aria-controls="faqOne">
+                        How can I join a study group?
+                    </button>
+                </h2>
+                <div id="faqOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Navigate to the Groups section and choose the group that aligns with your course or interest.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false" aria-controls="faqTwo">
+                        Is there a fee for using StudyBee?
+                    </button>
+                </h2>
+                <div id="faqTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        StudyBee offers free and premium memberships. Premium memberships unlock additional features.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeadingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree" aria-expanded="false" aria-controls="faqThree">
+                        Can I upload my own study materials?
+                    </button>
+                </h2>
+                <div id="faqThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Yes! Head to the Library section and click on "Upload Material" to share your resources.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sign Up Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Sign Up for StudyBee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('auth.register') }}">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log In Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Log In to StudyBee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('auth.login') }}">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Join StudyBee Today</h2>
+            <p>Be part of a thriving community dedicated to academic excellence.</p>
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const languages = {
+            en: {
+                welcome: "Welcome to the StudyBee Real-Time Chat! Ask me anything or type 'FAQs' for common questions.",
+                faqs: [
+                    "How can I join a study group?",
+                    "Is StudyBee free to use?",
+                    "How do I upload study materials?",
+                    "Where can I find my schedule?",
+                    "How do I contact a tutor?",
+                    "What should I do if I forget my password?",
+                    "What subjects does StudyBee cover?",
+                    "Can StudyBee help me stay motivated?",
+                    "Is my data safe on StudyBee?",
+                    "How can I track my progress?"
+                ],
+                answers: {
+                    "how can i join a study group?": "Navigate to the Groups section and select the group that matches your interest or course.",
+                    "is studybee free to use?": "StudyBee offers free and premium memberships. Free members can access most features, while premium users get additional benefits.",
+                    "how do i upload study materials?": "Go to the Library section and click on 'Upload Material.' Fill in the required details and submit your file.",
+                    "where can i find my schedule?": "Visit the 'Dashboard' section to view your upcoming events and study schedules.",
+                    "how do i contact a tutor?": "You can contact a tutor via the 'Tutors' section in the app. Search for tutors based on subjects and send them a message.",
+                    "what should i do if i forget my password?": "Click on 'Forgot Password' on the login page and follow the instructions to reset your password.",
+                    "what subjects does studybee cover?": "StudyBee supports a variety of subjects, including mathematics, science, history, literature, and more. Browse the library or ask a tutor for help.",
+                    "can studybee help me stay motivated?": "Absolutely! Join study groups, set goals in the app, and track your progress for consistent motivation.",
+                    "is my data safe on studybee?": "Yes, StudyBee uses advanced encryption and secure servers to ensure your data is safe and private.",
+                    "how can i track my progress?": "Visit the 'Progress' section in your dashboard to view your achievements and analytics.",
+                    "hi": "Hello! How can I help you?",
+                    "hello": "Hi! Nice to meet you!",
+                    "nice to meet you": "Nice to meet you too!",
+                    "thank you": "You're welcome! Let me know if I can assist you further.",
+                    "goodbye": "Goodbye! Have a great day!",
+                    "how do i prepare for exams?": "Set a schedule, focus on weak areas, and use StudyBee's study materials to prepare efficiently."
+                },
+                unknown: "I'm sorry, I don't have an answer to that question. Please check the FAQ section or try rephrasing."
+            },
+
+            fr: {
+                welcome: "Bienvenue dans le chat en temps réel de StudyBee ! Posez-moi une question ou tapez 'FAQs' pour des questions fréquentes.",
+                faqs: [
+                    "Comment puis-je rejoindre un groupe d'étude ?",
+                    "StudyBee est-il gratuit ?",
+                    "Comment puis-je télécharger du matériel d'étude ?",
+                    "Où puis-je trouver mon emploi du temps ?",
+                    "Comment contacter un tuteur ?",
+                    "Que dois-je faire si j'oublie mon mot de passe ?",
+                    "Quels sujets couvre StudyBee ?",
+                    "StudyBee peut-il m'aider à rester motivé ?",
+                    "Mes données sont-elles sécurisées sur StudyBee ?",
+                    "Comment suivre mes progrès ?"
+                ],
+                answers: {
+                    "comment puis-je rejoindre un groupe d'étude ?": "Allez dans la section Groupes et sélectionnez le groupe qui correspond à votre cours ou intérêt.",
+                    "studybee est-il gratuit ?": "StudyBee propose des abonnements gratuits et premium. Les membres gratuits ont accès à la plupart des fonctionnalités, tandis que les utilisateurs premium bénéficient d'avantages supplémentaires.",
+                    "comment puis-je télécharger du matériel d'étude ?": "Allez dans la section Bibliothèque et cliquez sur 'Télécharger du matériel'. Remplissez les informations requises et soumettez votre fichier.",
+                    "où puis-je trouver mon emploi du temps ?": "Visitez la section 'Tableau de bord' pour voir vos événements à venir et vos emplois du temps.",
+                    "comment contacter un tuteur ?": "Vous pouvez contacter un tuteur via la section 'Tuteurs'. Recherchez des tuteurs par matière et envoyez-leur un message.",
+                    "que dois-je faire si j'oublie mon mot de passe ?": "Cliquez sur 'Mot de passe oublié' sur la page de connexion et suivez les instructions pour le réinitialiser.",
+                    "quels sujets couvre studybee ?": "StudyBee prend en charge une variété de sujets, notamment les mathématiques, les sciences, l'histoire, la littérature, etc.",
+                    "studybee peut-il m'aider à rester motivé ?": "Absolument ! Rejoignez des groupes d'étude, définissez des objectifs et suivez vos progrès pour rester motivé.",
+                    "mes données sont-elles sécurisées sur studybee ?": "Oui, StudyBee utilise un cryptage avancé et des serveurs sécurisés pour garantir la sécurité et la confidentialité de vos données.",
+                    "comment suivre mes progrès ?": "Visitez la section 'Progrès' de votre tableau de bord pour voir vos réalisations et vos analyses.",
+                    "bonjour": "Bonjour ! Ravi de vous aider !",
+                    "merci": "Avec plaisir ! N'hésitez pas à poser d'autres questions.",
+                    "au revoir": "Au revoir ! Bonne journée !",
+                    "comment se préparer aux examens ?": "Planifiez un horaire, concentrez-vous sur vos points faibles et utilisez les ressources de StudyBee pour une préparation efficace."
+                },
+                unknown: "Je suis désolé, je n'ai pas de réponse à cette question. Veuillez consulter la section FAQ ou reformuler votre question."
+            },
+            zh: {
+                welcome: "欢迎来到 StudyBee 实时聊天！随时向我提问，或者输入“FAQs”查看常见问题。",
+                faqs: [
+                    "如何加入学习小组？",
+                    "StudyBee 是免费的吗？",
+                    "我如何上传学习资料？",
+                    "在哪里可以找到我的日程安排？",
+                    "如何联系导师？",
+                    "如果忘记密码怎么办？",
+                    "StudyBee 涵盖哪些科目？",
+                    "StudyBee 能帮助我保持动力吗？",
+                    "我的数据在 StudyBee 上安全吗？",
+                    "如何跟踪我的进度？"
+                ],
+                answers: {
+                    "如何加入学习小组？": "进入“学习小组”页面，选择适合您的课程或兴趣的小组。",
+                    "studybee 是免费的吗？": "StudyBee 提供免费和高级会员资格。免费用户可以访问大多数功能，高级用户可享受更多特权。",
+                    "我如何上传学习资料？": "前往“资料库”页面，点击“上传资料”，填写相关信息并提交文件。",
+                    "在哪里可以找到我的日程安排？": "请访问“仪表板”部分查看您的日程安排和活动。",
+                    "如何联系导师？": "您可以通过“导师”部分联系导师，根据科目搜索导师并发送消息。",
+                    "如果忘记密码怎么办？": "在登录页面上点击“忘记密码”并按照说明重置您的密码。",
+                    "studybee 涵盖哪些科目？": "StudyBee 涵盖多种科目，包括数学、科学、历史、文学等。",
+                    "studybee 能帮助我保持动力吗？": "当然可以！加入学习小组，设置目标并跟踪您的进度。",
+                    "我的数据在 studybee 上安全吗？": "是的，StudyBee 使用高级加密和安全服务器来确保您的数据安全和隐私。",
+                    "如何跟踪我的进度？": "访问仪表板的“进度”部分以查看您的成就和分析。"
+                },
+                unknown: "对不起，我无法回答这个问题。请查看常见问题或重新表述您的问题。"
+            },
+            ja: {
+                welcome: "StudyBeeリアルタイムチャットへようこそ！ご質問があればどうぞ。「FAQs」と入力するとよくある質問が表示されます。",
+                faqs: [
+                    "どうやって勉強グループに参加できますか？",
+                    "StudyBeeは無料ですか？",
+                    "勉強資料をどうやってアップロードできますか？",
+                    "スケジュールはどこで見つけられますか？",
+                    "チューターに連絡するには？",
+                    "パスワードを忘れた場合はどうすればよいですか？",
+                    "StudyBeeはどの科目をカバーしていますか？",
+                    "StudyBeeはモチベーション維持に役立ちますか？",
+                    "StudyBeeのデータは安全ですか？",
+                    "進捗を追跡するにはどうすればよいですか？"
+                ],
+                answers: {
+                    "どうやって勉強グループに参加できますか？": "「グループ」セクションに進み、あなたのコースや興味に合ったグループを選んでください。",
+                    "studybeeは無料ですか？": "StudyBeeは無料とプレミアムの両方の会員資格を提供します。無料ユーザーはほとんどの機能を利用できますが、プレミアムユーザーには追加の特典があります。",
+                    "勉強資料をどうやってアップロードできますか？": "「ライブラリ」セクションに進み、「資料をアップロード」をクリックして、必要な詳細を記入し、ファイルを提出してください。",
+                    "スケジュールはどこで見つけられますか？": "「ダッシュボード」セクションで予定表とイベントを確認してください。",
+                    "チューターに連絡するには？": "「チューター」セクションを利用して、科目に基づいてチューターを探し、メッセージを送信できます。",
+                    "パスワードを忘れた場合はどうすればよいですか？": "ログインページで「パスワードを忘れた」をクリックし、指示に従ってパスワードをリセットしてください。",
+                    "studybeeはどの科目をカバーしていますか？": "StudyBeeは数学、科学、歴史、文学など、さまざまな科目をサポートしています。",
+                    "studybeeはモチベーション維持に役立ちますか？": "もちろんです！学習グループに参加し、目標を設定し、進捗を追跡してモチベーションを維持してください。",
+                    "studybeeのデータは安全ですか？": "はい、StudyBeeは高度な暗号化と安全なサーバーを使用してデータの安全性を確保しています。",
+                    "進捗を追跡するにはどうすればよいですか？": "「ダッシュボード」の「進捗」セクションで成果と分析を確認してください。"
+                },
+                unknown: "申し訳ありませんが、その質問にお答えすることができません。「FAQ」セクションをご覧いただくか、質問を言い換えてください。"
+            }
+        };
+
+        let currentLanguage = "en";
+
+        // Update language selection
+        const languageSelector = document.getElementById("languageSelector");
+        languageSelector.addEventListener("change", (e) => {
+            currentLanguage = e.target.value;
+            const chatMessages = document.getElementById("chatMessages");
+            chatMessages.innerHTML = `<p>StudyBee Bot: ${languages[currentLanguage].welcome}</p>`;
+        });
+
+        // Chat functionality
+        const chatMessages = document.getElementById("chatMessages");
+        const chatInput = document.getElementById("chatInput");
+        const sendMessage = document.getElementById("sendMessage");
+
+        sendMessage.addEventListener("click", handleUserMessage);
+        chatInput.addEventListener("keypress", (e) => {
+            if (e.key === 'Enter') handleUserMessage();
+        });
+
+        function handleUserMessage() {
+            const userMessage = chatInput.value.trim().toLowerCase();
+            if (userMessage) {
+                addMessageToChat(`You: ${chatInput.value}`);
+                chatInput.value = '';
+                autoAnswer(userMessage);
+            }
+        }
+
+        function addMessageToChat(message) {
+            const newMessage = document.createElement('p');
+            newMessage.textContent = message;
+            chatMessages.appendChild(newMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function autoAnswer(userMessage) {
+            const faqs = languages[currentLanguage].faqs.map(f => f.toLowerCase());
+            const answers = languages[currentLanguage].answers;
+
+            if (userMessage === "faqs") {
+                addMessageToChat("StudyBee Bot: Here are some frequently asked questions:");
+                languages[currentLanguage].faqs.forEach((faq) => addMessageToChat(`- ${faq}`));
+            } else if (faqs.includes(userMessage)) {
+                const originalQuestion = Object.keys(answers).find(q => q.toLowerCase() === userMessage);
+                addMessageToChat(`StudyBee Bot: ${answers[originalQuestion]}`);
+            } else if (answers[userMessage]) {
+                addMessageToChat(`StudyBee Bot: ${answers[userMessage]}`);
+            } else {
+                addMessageToChat(`StudyBee Bot: ${languages[currentLanguage].unknown}`);
+            }
+        }
+    </script>
+</body>
+</html>

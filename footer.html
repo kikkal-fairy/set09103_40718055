@@ -1,0 +1,97 @@
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-dark text-light mt-5 py-5" style="box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.3);">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">About StudyBee</h5>
+                <p class="mt-2" style="line-height: 1.6; text-align: justify;">
+                    StudyBee is your ultimate platform for collaborative learning and academic success. We provide a space
+                    where students can learn, share, and grow together.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">Quick Links</h5>
+                <ul class="list-unstyled mt-2">
+                    <li><a href="{{ url_for('home') }}" class="text-light text-decoration-none link-hover">Home</a></li>
+                    <li><a href="{{ url_for('features') }}" class="text-light text-decoration-none link-hover">Features</a></li>
+                    <li><a href="{{ url_for('groups') }}" class="text-light text-decoration-none link-hover">Groups</a></li>
+                    <li><a href="{{ url_for('library') }}" class="text-light text-decoration-none link-hover">Library</a></li>
+                    <li><a href="{{ url_for('about') }}" class="text-light text-decoration-none link-hover">About</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">Contact Us</h5>
+                <ul class="list-unstyled mt-2">
+                    <li><i class="fas fa-envelope me-2" style="color: #FFC107;"></i> info@studybee.com</li>
+                    <li><i class="fas fa-phone-alt me-2" style="color: #FFC107;"></i> +123-456-7890</li>
+                    <li><i class="fas fa-map-marker-alt me-2" style="color: #FFC107;"></i> 123 [   ] St, City Name, Country</li>
+                </ul>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">Follow Us</h5>
+                <div class="d-flex mt-3 gap-3 justify-content-center">
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="bg-light my-4">
+    <div class="text-center">
+        <p class="mb-0" style="font-size: 1.1rem;">&copy; 2024 StudyBee. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- JavaScript for Social Icons Animation -->
+<script>
+    document.querySelectorAll('.fab').forEach(icon => {
+        icon.addEventListener('mouseover', function () {
+            this.style.transform = 'scale(1.3)';
+            this.style.transition = 'transform 0.3s ease-in-out';
+            this.style.color = '#FFC107';
+        });
+        icon.addEventListener('mouseout', function () {
+            this.style.transform = 'scale(1)';
+            this.style.color = '';
+        });
+    });
+
+    // Link hover effect for quick links
+    document.querySelectorAll('.link-hover').forEach(link => {
+        link.addEventListener('mouseover', function () {
+            this.style.color = '#FF6F00';
+            this.style.textDecoration = 'underline';
+        });
+        link.addEventListener('mouseout', function () {
+            this.style.color = '';
+            this.style.textDecoration = 'none';
+        });
+    });
+</script>
+
+<!-- Additional CSS for more vibrant styling -->
+<style>
+    footer {
+        background: linear-gradient(to bottom, #333, #000);
+        color: #ffffff;
+    }
+    footer h5 {
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    footer ul li {
+        margin-bottom: 10px;
+    }
+    .social-hover:hover {
+        color: #FF6F00 !important;
+    }
+</style>
