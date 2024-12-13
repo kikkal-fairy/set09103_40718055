@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | StudyBee</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #FFC107, #FFD54F);
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .register-box {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .register-box h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #212529;
+        }
+
+        .form-control {
+            border: 1px solid #FFC107;
+            border-radius: 5px;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+            border-color: #FFA000;
+        }
+
+        .btn-primary {
+            background-color: #FFC107;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #FFA000;
+        }
+
+        .social-buttons .btn {
+            width: 100%;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        .social-buttons .btn i {
+            margin-right: 5px;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #FFA000;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .alternative {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .alternative a {
+            color: #FFA000;
+            font-weight: bold;
+        }
+
+        .alternative a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to bottom right, #FFC107, #FFD54F);">
+    <div class="container">
+        <!-- Styled Brand Name as Logo with More Distinction -->
+        <a class="navbar-brand" href="{{ url_for('home') }}" style="font-family: 'Pacifico', cursive; font-size: 2.2rem; color: #212529; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+            <span style="color: #212529; font-weight: bold;">Study</span>
+            <span style="color: #FF6F00; font-weight: bold;">Bee</span>
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Navbar Items with Hover Effect -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'home' %}active{% endif %}" href="{{ url_for('home') }}" style="font-weight: bold; color: #212529;">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'features' %}active{% endif %}" href="{{ url_for('features') }}" style="font-weight: bold; color: #212529;">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'groups' %}active{% endif %}" href="{{ url_for('groups') }}" style="font-weight: bold; color: #212529;">
+                        Groups
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'library' %}active{% endif %}" href="{{ url_for('library') }}" style="font-weight: bold; color: #212529;">
+                        Library
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about') }}" style="font-weight: bold; color: #212529;">
+                        About
+                    </a>
+                </li>
+
+                <!-- User Dropdown (If Logged In) -->
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #212529; font-weight: bold;">
+                            <i class="fas fa-user"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Login and Sign Up Buttons (If Not Logged In) -->
+                    <li class="nav-item">
+                        <a class="nav-link btn text-white px-3" href="{{ url_for('login') }}" style="background-color: #212529; border-radius: 30px; font-weight: bold; transition: all 0.3s ease;">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light text-dark px-3 ms-2" href="{{ url_for('register') }}" style="border-radius: 30px; font-weight: bold; transition: all 0.3s ease;">
+                            Sign Up
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <div class="register-box">
+        <h1>Register to StudyBee</h1>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('auth.register') }}">
+            {{ form.hidden_tag() }}
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                {{ form.name(class="form-control", placeholder="Enter your full name") }}
+                {% for error in form.name.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                {{ form.email(class="form-control", placeholder="Enter your email address") }}
+                {% for error in form.email.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                {{ form.password(class="form-control", placeholder="Create a password") }}
+                {% for error in form.password.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                {% for error in form.confirm_password.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <!-- Submit Button -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+            </div>
+        </form>
+
+        <!-- Social Login Buttons -->
+        <div class="social-buttons mt-4">
+            <a href="{{ url_for('auth.facebook_login') }}" class="btn btn-primary">
+                <i class="fab fa-facebook-f"></i> Register with Facebook
+            </a>
+            <a href="{{ url_for('auth.google_login') }}" class="btn btn-danger">
+                <i class="fab fa-google"></i> Register with Google
+            </a>
+        </div>
+
+        <!-- Forgot Password and Alternative Actions -->
+        <a href="{{ url_for('auth.reset_password') }}" class="forgot-password">Forgot Password?</a>
+        <div class="alternative mt-3">
+            Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a>.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
