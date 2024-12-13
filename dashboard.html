@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFF9E5;
+        }
+
+        .hero {
+            background: linear-gradient(to bottom right, #FFC107, #FFD54F);
+            color: #212529;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeInUp 2.5s ease;
+        }
+
+        .hero-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .features,
+        .community,
+        .faq-section,
+        .testimonials {
+            padding: 3rem 0;
+        }
+
+        .feature-card {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: #FFC107;
+            margin-bottom: 1rem;
+        }
+
+         /* Real-Time Chat Widget */
+         .real-time-chat {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #FFF9E5;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .real-time-chat-header {
+            background: #FFC107;
+            color: #212529;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .language-selector {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .language-selector select {
+            padding: 5px 10px;
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            background-color: #FFFFFF;
+        }
+
+        .real-time-chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border-top: 1px solid #FFD54F;
+            border-bottom: 1px solid #FFD54F;
+            background: #FFFFFF;
+        }
+
+        .real-time-chat-messages p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+.btn-signup {
+    background-color: #FFB400;
+    color: white;
+    border: none;
+}
+
+.btn-signup:hover {
+    background-color: #F2C94C;
+    cursor: pointer;
+}
+
+
+        .bot-message {
+            background: #FFC107;
+            color: #212529;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .user-message {
+            background: #E3F2FD;
+            color: #212529;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-style: italic;
+        }
+
+        .real-time-chat-input {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            background: #FFF9E5;
+        }
+
+        .real-time-chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .real-time-chat-input button {
+            padding: 10px 20px;
+            background: #FFC107;
+            border: none;
+            color: #212529;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .real-time-chat-input button:hover {
+            background: #FFA000;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .real-time-chat {
+                width: 90%;
+            }
+
+            .real-time-chat-header {
+                font-size: 1.2rem;
+            }
+
+            .real-time-chat-input input {
+                font-size: 0.8rem;
+            }
+
+            .real-time-chat-input button {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .real-time-chat {
+                width: 90%;
+            }
+
+            .real-time-chat-header {
+                font-size: 1.2rem;
+            }
+
+            .real-time-chat-input input {
+                font-size: 0.8rem;
+            }
+
+            .real-time-chat-input button {
+                font-size: 0.8rem;
+            }
+        }
+
+        .cta {
+            background: linear-gradient(to right, #FFC107, #FFA000);
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(to bottom right, #FFC107, #FFD54F); padding: 1rem 1.5rem; transition: all 0.5s ease;">
+    <div class="container-fluid">
+        <!-- Animated Brand Name as Logo with More Distinction -->
+        <a class="navbar-brand d-flex align-items-center logo-hover" href="{{ url_for('home') }}" style="font-family: 'Pacifico', cursive; font-size: 2.5rem;">
+            <span class="text-dark fw-bold me-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">Study</span>
+            <span class="fw-bold" style="color: #FF3D00; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);">Bee</span>
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center gap-3">
+                <!-- Navbar Items with Hover Effect, Active State, and Spacing -->
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'home' %}active text-decoration-underline{% endif %}" href="{{ url_for('home') }}">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'features' %}active text-decoration-underline{% endif %}" href="{{ url_for('features') }}">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'groups' %}active text-decoration-underline{% endif %}" href="{{ url_for('groups') }}">
+                        Groups
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'library' %}active text-decoration-underline{% endif %}" href="{{ url_for('library') }}">
+                        Library
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'about' %}active text-decoration-underline{% endif %}" href="{{ url_for('about') }}">
+                        About
+                    </a>
+                </li>
+
+                <!-- User Dropdown (If Logged In) -->
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-bold d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Login and Sign Up Buttons (If Not Logged In) -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-dark px-4 py-2 me-2 rounded-pill text-white fw-bold hover-shadow" href="{{ url_for('login') }}" style="transition: all 0.3s ease;">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light px-4 py-2 rounded-pill fw-bold shadow-sm hover-shadow" href="{{ url_for('register') }}" style="transition: all 0.3s ease;">
+                            Sign Up
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Additional CSS for Improved Contrast, Hover Enhancements, and Animation -->
+<style>
+    /* Custom style for the Sign Up button */
+.btn-signup {
+    background-color: #FFB400;  /* Example: Bee Yellow color */
+    color: white;               /* Text color */
+    border: none;               /* Remove border */
+}
+
+.btn-signup:hover {
+    background-color: #F2C94C;  /* Lighter yellow on hover */
+    cursor: pointer;
+}
+
+    /* Navbar Link Color and Hover Effect */
+    .navbar-nav .nav-link {
+        color: #212529; /* Dark text for better contrast */
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #FF6F00; /* Bright orange color for hover */
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow on hover */
+        background-color: rgba(255, 111, 0, 0.1); /* Soft background highlight */
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Active Link Styling */
+    .navbar-nav .nav-link.active {
+        color: #FF6F00; /* Use the bee-themed orange for the active link */
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: rgba(255, 111, 0, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Animated Brand Logo Hover */
+    .logo-hover:hover {
+        transform: rotate(-3deg) scale(1.1);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* Sticky Navbar Shadow on Scroll */
+    .navbar-scrolled {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    /* Hover effect for Login and Sign-Up buttons */
+    .hover-shadow:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+
+<!-- JavaScript for Additional Navbar Features -->
+<script>
+    // Make navbar sticky on scroll and add shadow
+    window.onscroll = function() {
+        let navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('navbar-scrolled');
+        } else {
+            navbar.classList.remove('navbar-scrolled');
+        }
+    };
+
+    // Smooth scrolling for links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.hash !== "") {
+                e.preventDefault();
+                const target = document.querySelector(this.hash);
+                window.scroll({
+                    top: target.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Close the mobile navbar when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                bootstrap.Collapse.getInstance(navbarCollapse).hide();
+            }
+        });
+    });
+</script>
+
+<!-- Dashboard Content -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Welcome</h5>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ current_user.avatar }}" alt="User Avatar" class="header-avatar">
+                        <div>
+                            <h6>{{ current_user.username }}</h6>
+                            <p>{{ current_user.email }}</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Button to open the popup modal -->
+                    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#navModal">
+                        Open Navigation Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-lg-9 col-md-8 col-sm-12">
+            <h2>Welcome to your Dashboard</h2>
+            <p>This is where you can access your profile, settings, and other important sections.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Modal for Navigation -->
+<div class="modal fade" id="navModal" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="navModalLabel">Navigation Menu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Navigation Links inside Modal -->
+                <ul class="nav flex-column">
+                    <!-- Button to trigger the popup modal for My Profile -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profileModal">
+    My Profile
+</button>
+
+<!-- Modal Popup for My Profile -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bee-header">
+                <h5 class="modal-title" id="profileModalLabel">My Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bee-body">
+                <form>
+                    <!-- Profile Picture Section -->
+                    <div class="form-group">
+                        <label for="profilePicture" class="bee-label">Profile Picture</label><br>
+                        <img src="{{ current_user.avatar }}" alt="Profile Picture" class="header-avatar mb-2">
+                        <input type="file" class="form-control-file" id="profilePicture">
+                    </div>
+
+                    <!-- Username Section -->
+                    <div class="form-group">
+                        <label for="username" class="bee-label">Username</label>
+                        <input type="text" class="form-control bee-input" id="username" value="{{ current_user.username }}" placeholder="Enter your username">
+                    </div>
+
+                    <!-- Email Section -->
+                    <div class="form-group">
+                        <label for="email" class="bee-label">Email address</label>
+                        <input type="email" class="form-control bee-input" id="email" value="{{ current_user.email }}" placeholder="Enter your email address">
+                    </div>
+
+                    <!-- Password Section -->
+                    <div class="form-group">
+                        <label for="password" class="bee-label">Password</label>
+                        <input type="password" class="form-control bee-input" id="password" placeholder="Enter new password">
+                    </div>
+
+                    <!-- Save Button -->
+                    <button type="submit" class="btn btn-warning bee-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bee Theme CSS -->
+<style>
+    /* Bee-inspired Theme */
+    .bee-header {
+        background-color: #F2C94C;  /* Soft yellow, like honey */
+        color: black;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .bee-body {
+        background-color: #FFEC58;  /* Lighter yellow background */
+        color: black;
+    }
+
+    .bee-label {
+        font-weight: bold;
+        color: #333;  /* Darker text for clarity */
+        font-size: 1.1rem;
+    }
+
+    .bee-input {
+        border-radius: 8px;
+        border: 2px solid #FFB400;  /* Bee yellow color for borders */
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .bee-input:focus {
+        border-color: #F2C94C; /* Lighter yellow on focus */
+        box-shadow: 0 0 5px rgba(242, 201, 76, 0.7);
+    }
+
+    .bee-btn {
+        background-color: #FFB400;  /* Bee yellow button */
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+    }
+
+    .bee-btn:hover {
+        background-color: #F2C94C;  /* Lighter yellow on hover */
+        cursor: pointer;
+    }
+
+    .header-avatar {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    /* Optional: Adding a hexagonal background pattern */
+    .bee-body {
+        background-image: url('https://www.transparenttextures.com/patterns/honeycomb.png'); /* Honeycomb pattern */
+        background-size: 80px 80px;
+    }
+
+    /* Styling for buttons and inputs for better user experience */
+    .form-control:focus {
+        border-color: #FFB400; /* Bee yellow on focus */
+        box-shadow: 0 0 5px rgba(255, 180, 0, 0.5);
+    }
+
+    /* Button Style */
+    .btn-warning {
+        background-color: #FFB400;
+        border: none;
+    }
+
+    .btn-warning:hover {
+        background-color: #F2C94C;
+        cursor: pointer;
+    }
+</style>
+
+ <!-- Button to trigger the popup modal for Settings -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal">
+    Open Settings
+</button>
+
+<!-- Modal Popup for Settings -->
+<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bee-header">
+                <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bee-body">
+                <form>
+                    <!-- Profile Settings Section -->
+                    <h6>Profile Settings</h6>
+                    <div class="form-group">
+                        <label for="username" class="bee-label">Username</label>
+                        <input type="text" class="form-control bee-input" id="username" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="bee-label">Email address</label>
+                        <input type="email" class="form-control bee-input" id="email" placeholder="Enter your email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="bee-label">Password</label>
+                        <input type="password" class="form-control bee-input" id="password" placeholder="Enter new password">
+                    </div>
+
+                    <!-- Privacy Settings Section -->
+                    <h6>Privacy Settings</h6>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="twoFactor">
+                        <label class="form-check-label bee-label" for="twoFactor">Enable two-factor authentication</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="searchable">
+                        <label class="form-check-label bee-label" for="searchable">Allow search engines to index my profile</label>
+                    </div>
+
+                    <!-- Notification Settings Section -->
+                    <h6>Notification Settings</h6>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="emailNotifications">
+                        <label class="form-check-label bee-label" for="emailNotifications">Receive email notifications</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="pushNotifications">
+                        <label class="form-check-label bee-label" for="pushNotifications">Enable push notifications</label>
+                    </div>
+
+                    <!-- Appearance Settings Section -->
+                    <h6>Appearance Settings</h6>
+                    <div class="form-group">
+                        <label for="themeSelect" class="bee-label">Select Theme</label>
+                        <select class="form-control bee-input" id="themeSelect">
+                            <option>Light</option>
+                            <option>Dark</option>
+                            <option>System Default</option>
+                        </select>
+                    </div>
+
+                    <!-- Save Button -->
+                    <button type="submit" class="btn btn-warning bee-btn">Save Settings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+<!-- Bee Theme CSS for Settings -->
+<style>
+    /* Bee-inspired Theme for Settings */
+    .bee-header {
+        background-color: #F2C94C;  /* Soft yellow, like honey */
+        color: black;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .bee-body {
+        background-color: #FFEC58;  /* Lighter yellow background */
+        color: black;
+        background-image: url('https://www.transparenttextures.com/patterns/honeycomb.png'); /* Honeycomb pattern */
+        background-size: 80px 80px;
+    }
+
+    .bee-label {
+        font-weight: bold;
+        color: #333;  /* Darker text for clarity */
+        font-size: 1.1rem;
+    }
+
+    .bee-input {
+        border-radius: 8px;
+        border: 2px solid #FFB400;  /* Bee yellow color for borders */
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .bee-input:focus {
+        border-color: #F2C94C; /* Lighter yellow on focus */
+        box-shadow: 0 0 5px rgba(242, 201, 76, 0.7);
+    }
+
+    .bee-btn {
+        background-color: #FFB400;  /* Bee yellow button */
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+    }
+
+    .bee-btn:hover {
+        background-color: #F2C94C;  /* Lighter yellow on hover */
+        cursor: pointer;
+    }
+
+    .form-check-label {
+        font-size: 1rem;
+    }
+
+    .form-control:focus {
+        border-color: #FFB400;
+        box-shadow: 0 0 5px rgba(255, 180, 0, 0.5);
+    }
+
+    .btn-warning {
+        background-color: #FFB400;
+        border: none;
+    }
+
+    .btn-warning:hover {
+        background-color: #F2C94C;
+        cursor: pointer;
+    }
+</style>
+
+
+<!-- Button to trigger the popup modal for My Groups -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupsModal">
+    My Groups
+</button>
+
+<!-- Modal Popup for My Groups -->
+<div class="modal fade" id="groupsModal" tabindex="-1" role="dialog" aria-labelledby="groupsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bee-header">
+                <h5 class="modal-title" id="groupsModalLabel">My Groups</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bee-body">
+                <h6>Your Groups</h6>
+                <div class="list-group">
+                    <div class="list-group-item bee-list-item">
+                        <h6>Group 1: <small>Science Study Group</small></h6>
+                        <p>Members: 10</p>
+                        <button class="btn btn-danger btn-sm">Leave Group</button>
+                    </div>
+                    <div class="list-group-item bee-list-item">
+                        <h6>Group 2: <small>Math Enthusiasts</small></h6>
+                        <p>Members: 15</p>
+                        <button class="btn btn-danger btn-sm">Leave Group</button>
+                    </div>
+                    <div class="list-group-item bee-list-item">
+                        <h6>Group 3: <small>Literature Lovers</small></h6>
+                        <p>Members: 12</p>
+                        <button class="btn btn-danger btn-sm">Leave Group</button>
+                    </div>
+                </div>
+
+                <!-- Join New Group Section -->
+                <h6 class="mt-4">Join New Group</h6>
+                <div class="form-group">
+                    <label for="newGroup" class="bee-label">Enter Group Name:</label>
+                    <input type="text" class="form-control bee-input" id="newGroup" placeholder="Group name">
+                </div>
+                <button class="btn btn-success bee-btn">Join Group</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+<!-- Bee Theme CSS for My Groups -->
+<style>
+    /* Bee-inspired Theme for My Groups */
+    .bee-header {
+        background-color: #F2C94C;  /* Soft yellow, like honey */
+        color: black;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .bee-body {
+        background-color: #FFEC58;  /* Lighter yellow background */
+        color: black;
+        background-image: url('https://www.transparenttextures.com/patterns/honeycomb.png'); /* Honeycomb pattern */
+        background-size: 80px 80px;
+    }
+
+    .bee-label {
+        font-weight: bold;
+        color: #333;  /* Darker text for clarity */
+        font-size: 1.1rem;
+    }
+
+    .bee-input {
+        border-radius: 8px;
+        border: 2px solid #FFB400;  /* Bee yellow color for borders */
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .bee-input:focus {
+        border-color: #F2C94C; /* Lighter yellow on focus */
+        box-shadow: 0 0 5px rgba(242, 201, 76, 0.7);
+    }
+
+    .bee-btn {
+        background-color: #FFB400;  /* Bee yellow button */
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+    }
+
+    .bee-btn:hover {
+        background-color: #F2C94C;  /* Lighter yellow on hover */
+        cursor: pointer;
+    }
+
+    .bee-list-item {
+        border-left: 5px solid #FFB400;  /* Yellow left border */
+        padding-left: 15px;
+        margin-bottom: 10px;
+    }
+
+    .btn-danger, .btn-success {
+        border-radius: 20px;
+    }
+
+    .btn-danger:hover, .btn-success:hover {
+        background-color: #F2C94C;  /* Change to lighter yellow on hover */
+    }
+</style>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('library') }}">Study Library</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+        <!-- Main Content -->
+<div class="col-lg-9 col-md-8 col-sm-12">
+    <div class="row">
+        <!-- Stats Cards -->
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">My Groups</h5>
+                    <p class="card-text" id="userGroupsCount">Loading...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Study Library</h5>
+                    <p class="card-text" id="userLibraryCount">Loading...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Notifications</h5>
+                    <p class="card-text" id="userNotificationsCount">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+<!-- AJAX for auto-updating -->
+<script>
+    // Function to fetch the latest stats data using AJAX
+    function fetchStatsData() {
+        $.ajax({
+            url: '/api/get-dashboard-stats',  // Replace with your server URL to get stats data
+            method: 'GET',
+            success: function(data) {
+                // Update the cards with the latest data
+                $('#userGroupsCount').text(data.user_groups_count);  // Update My Groups count
+                $('#userLibraryCount').text(data.user_library_count);  // Update Study Library count
+                $('#userNotificationsCount').text(data.user_notifications_count);  // Update Notifications count
+            },
+            error: function(error) {
+                console.log('Error fetching stats data:', error);
+            }
+        });
+    }
+
+    // Set an interval to auto-update the data every 5 seconds
+    setInterval(fetchStatsData, 5000); // 5000ms = 5 seconds
+
+    // Initial data fetch when the page loads
+    fetchStatsData();
+</script>
+
+
+            <!-- Recent Activities -->
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Recent Activity</h5>
+                <ul class="list-group" id="recentActivitiesList">
+                    <li class="list-group-item">
+                        <strong>Joined Group:</strong> <span id="recentGroup">Loading...</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Uploaded Material:</strong> <span id="recentMaterial">Loading...</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Completed Quiz:</strong> <span id="recentQuiz">Loading...</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upcoming Events Section -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Upcoming Events</h5>
+                <ul class="list-group" id="upcomingEventsList">
+                    <li class="list-group-item">
+                        <strong>Study Group A Meeting:</strong> <span class="badge bg-primary" id="event1">Loading...</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Webinar on Data Science:</strong> <span class="badge bg-success" id="event2">Loading...</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Exam Preparation Session:</strong> <span class="badge bg-danger" id="event3">Loading...</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+<!-- AJAX for auto-updating Recent Activities and Upcoming Events -->
+<script>
+    // Function to fetch the latest recent activities and upcoming events data using AJAX
+    function fetchRecentActivitiesAndEvents() {
+        $.ajax({
+            url: '/api/get-recent-activities',  // Replace with your server URL to get recent activities and upcoming events
+            method: 'GET',
+            success: function(data) {
+                // Update Recent Activity section
+                $('#recentGroup').text(data.recent_group);
+                $('#recentMaterial').text(data.recent_material);
+                $('#recentQuiz').text(data.recent_quiz);
+
+                // Update Upcoming Events section
+                $('#event1').text(data.event1);
+                $('#event2').text(data.event2);
+                $('#event3').text(data.event3);
+            },
+            error: function(error) {
+                console.log('Error fetching recent activities and events:', error);
+            }
+        });
+    }
+
+    // Set an interval to auto-update the data every 10 seconds
+    setInterval(fetchRecentActivitiesAndEvents, 10000); // 10000ms = 10 seconds
+
+    // Initial data fetch when the page loads
+    fetchRecentActivitiesAndEvents();
+</script>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>&copy; 2024 YourCompany | All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+    </div>
+</footer>
+
+<!-- Optional JS for interactive elements -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function () {
+                card.classList.add('shadow-lg');
+            });
+            card.addEventListener('mouseout', function () {
+                card.classList.remove('shadow-lg');
+            });
+        });
+    });
+</script>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
