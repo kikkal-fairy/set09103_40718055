@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBee - Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Bee-Inspired Color Scheme */
+        /* General Styles for the Library Page */
+/* General Page Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFF9E5; /* Soft bee-inspired yellow background */
+    color: #212529;
+    margin: 0;
+    padding: 0;
+}
+
+/* Library Header */
+.library-header {
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(to bottom right, #FFC107, #FFD54F);
+    color: #212529;
+}
+
+.library-header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    animation: fadeInDown 1.5s ease;
+}
+
+.library-header p {
+    font-size: 1.4rem;
+    animation: fadeIn 2s ease;
+    margin-top: 10px;
+}
+
+/* Search Bar */
+.search-bar {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.search-bar input {
+    width: 60%;
+    max-width: 600px;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #CCC;
+    border-radius: 30px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #FFC107;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* Library Categories */
+.library-categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.library-categories .category-button {
+    padding: 10px 20px;
+    background-color: #212529;
+    color: #FFF9E5;
+    font-weight: bold;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.library-categories .category-button:hover {
+    background-color: #FFC107;
+    color: #212529;
+}
+
+/* Library Items Grid */
+.library-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 30px;
+    margin-bottom: 40px;
+}
+
+.library-item-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.library-item-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.library-item-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.library-item-card .card-body {
+    padding: 20px;
+}
+
+.library-item-card .card-body h5 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #212529;
+}
+
+.library-item-card .card-body p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.library-item-card .card-body .view-button {
+    padding: 10px 20px;
+    background-color: #FFC107;
+    color: #212529;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.library-item-card .card-body .view-button:hover {
+    background-color: #212529;
+    color: #FFF9E5;
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: #FFC107;
+    color: #212529;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body h5 {
+    font-weight: bold;
+}
+
+.modal-body p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Subscription CTA */
+.subscription-cta {
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(to right, #FFC107, #FFA000);
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.subscription-cta p {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.subscription-cta .subscribe-button {
+    padding: 15px 30px;
+    background-color: #212529;
+    color: #FFF9E5;
+    font-weight: bold;
+    border-radius: 30px;
+    border: none;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.subscription-cta .subscribe-button:hover {
+    background-color: #FFD54F;
+    color: #212529;
+}
+
+/* Reviews Section */
+.reviews-section {
+    padding: 3rem 0;
+    background-color: #FFF3C1;
+    text-align: center;
+}
+
+.reviews-section h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.review-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    display: inline-block;
+    width: 90%;
+    max-width: 400px;
+}
+
+.review-card blockquote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #555;
+}
+
+.review-card footer {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #212529;
+}
+
+/* Scroll to Top Button */
+#scrollToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFC107;
+    color: #212529;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: none; /* Initially hidden */
+}
+
+#scrollToTop:hover {
+    background-color: #FFA000;
+    color: #FFF9E5;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .library-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .search-bar input {
+        width: 90%;
+    }
+
+    .library-categories {
+        justify-content: space-around;
+    }
+
+    .library-item-card img {
+        height: 180px;
+    }
+
+    .subscription-cta p {
+        font-size: 1.2rem;
+    }
+
+    .subscription-cta .subscribe-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.navbar-nav .nav-link:hover {
+    color: #FF6F00; /* Hover color to match the bee theme */
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(to bottom right, #FFC107, #FFD54F); padding: 1rem 1.5rem; transition: all 0.5s ease;">
+    <div class="container-fluid">
+        <!-- Animated Brand Name as Logo with More Distinction -->
+        <a class="navbar-brand d-flex align-items-center logo-hover" href="{{ url_for('home') }}" style="font-family: 'Pacifico', cursive; font-size: 2.5rem;">
+            <span class="text-dark fw-bold me-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">Study</span>
+            <span class="fw-bold" style="color: #FF3D00; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);">Bee</span>
+        </a>
+
+        <!-- Toggle Button for Mobile -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center gap-3">
+                <!-- Navbar Items with Hover Effect, Active State, and Spacing -->
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'home' %}active text-decoration-underline{% endif %}" href="{{ url_for('home') }}">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'features' %}active text-decoration-underline{% endif %}" href="{{ url_for('features') }}">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'groups' %}active text-decoration-underline{% endif %}" href="{{ url_for('groups') }}">
+                        Groups
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'library' %}active text-decoration-underline{% endif %}" href="{{ url_for('library') }}">
+                        Library
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark fw-bold active-link {% if request.endpoint == 'about' %}active text-decoration-underline{% endif %}" href="{{ url_for('about') }}">
+                        About
+                    </a>
+                </li>
+
+                <!-- User Dropdown (If Logged In) -->
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark fw-bold d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Login and Sign Up Buttons (If Not Logged In) -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-dark px-4 py-2 me-2 rounded-pill text-white fw-bold hover-shadow" href="{{ url_for('login') }}" style="transition: all 0.3s ease;">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light px-4 py-2 rounded-pill fw-bold shadow-sm hover-shadow" href="{{ url_for('register') }}" style="transition: all 0.3s ease;">
+                            Sign Up
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Additional CSS for Improved Contrast, Hover Enhancements, and Animation -->
+<style>
+    /* Navbar Link Color and Hover Effect */
+    .navbar-nav .nav-link {
+        color: #212529; /* Dark text for better contrast */
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #FF6F00; /* Bright orange color for hover */
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow on hover */
+        background-color: rgba(255, 111, 0, 0.1); /* Soft background highlight */
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Active Link Styling */
+    .navbar-nav .nav-link.active {
+        color: #FF6F00; /* Use the bee-themed orange for the active link */
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: rgba(255, 111, 0, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    /* Animated Brand Logo Hover */
+    .logo-hover:hover {
+        transform: rotate(-3deg) scale(1.1);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease-in-out;
+    }
+
+    /* Sticky Navbar Shadow on Scroll */
+    .navbar-scrolled {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    /* Hover effect for Login and Sign-Up buttons */
+    .hover-shadow:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+</style>
+
+<!-- JavaScript for Additional Navbar Features -->
+<script>
+    // Make navbar sticky on scroll and add shadow
+    window.onscroll = function() {
+        let navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('navbar-scrolled');
+        } else {
+            navbar.classList.remove('navbar-scrolled');
+        }
+    };
+
+    // Smooth scrolling for links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.hash !== "") {
+                e.preventDefault();
+                const target = document.querySelector(this.hash);
+                window.scroll({
+                    top: target.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Close the mobile navbar when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                bootstrap.Collapse.getInstance(navbarCollapse).hide();
+            }
+        });
+    });
+</script>
+
+
+<!-- Search Bar for Library -->
+<div class="container my-4">
+    <h2 class="text-center mb-4" style="color: var(--bee-black);">Explore Study Materials</h2>
+    <div class="d-flex justify-content-center">
+        <input type="text" class="form-control w-50" id="searchLibrary" placeholder="Search for study materials..." onkeyup="searchLibrary()">
+    </div>
+</div>
+
+<!-- Material Categories -->
+<div class="container my-5">
+    <h3 class="text-center mb-4" style="color: var(--bee-black);">Categories</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <a href="#" class="btn btn-outline-secondary w-100 mb-3">Mathematics</a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="btn btn-outline-secondary w-100 mb-3">Science</a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="btn btn-outline-secondary w-100 mb-3">Literature</a>
+        </div>
+        <div class="col-md-3">
+            <a href="#" class="btn btn-outline-secondary w-100 mb-3">History</a>
+        </div>
+    </div>
+</div>
+
+<!-- Study Materials List -->
+<div class="container">
+    <h3 class="text-center mb-4" style="color: var(--bee-black);">Available Study Materials</h3>
+    <div class="row" id="materialList">
+        <!-- Dynamically generated materials will be inserted here -->
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/image.jpg" class="card-img-top" alt="Material Image">
+                <div class="card-body">
+                    <h5 class="card-title">Material Title 1</h5>
+                    <p class="card-text">Brief description of the material content.</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#materialDetailsModal" data-title="Material Title 1" data-description="Detailed description of the material." data-link="download_link">View Material</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/image.jpg" class="card-img-top" alt="Material Image">
+                <div class="card-body">
+                    <h5 class="card-title">Material Title 2</h5>
+                    <p class="card-text">Brief description of the material content.</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#materialDetailsModal" data-title="Material Title 2" data-description="Detailed description of the material." data-link="download_link">View Material</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/image.jpg" class="card-img-top" alt="Material Image">
+                <div class="card-body">
+                    <h5 class="card-title">Material Title 3</h5>
+                    <p class="card-text">Brief description of the material content.</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#materialDetailsModal" data-title="Material Title 3" data-description="Detailed description of the material." data-link="download_link">View Material</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Material Details -->
+<div class="modal fade" id="materialDetailsModal" tabindex="-1" aria-labelledby="materialDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="materialDetailsLabel">Material Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="materialDescription">Detailed description of the material.</p>
+                <a href="#" id="materialDownload" class="btn btn-success">Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-dark text-light mt-5 py-5" style="box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.3);">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">About StudyBee</h5>
+                <p class="mt-2" style="line-height: 1.6; text-align: justify;">
+                    StudyBee is your ultimate platform for collaborative learning and academic success. We provide a space
+                    where students can learn, share, and grow together.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">Quick Links</h5>
+                <ul class="list-unstyled mt-2">
+                    <li><a href="{{ url_for('home') }}" class="text-light text-decoration-none link-hover">Home</a></li>
+                    <li><a href="{{ url_for('features') }}" class="text-light text-decoration-none link-hover">Features</a></li>
+                    <li><a href="{{ url_for('groups') }}" class="text-light text-decoration-none link-hover">Groups</a></li>
+                    <li><a href="{{ url_for('library') }}" class="text-light text-decoration-none link-hover">Library</a></li>
+                    <li><a href="{{ url_for('about') }}" class="text-light text-decoration-none link-hover">About</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">Contact Us</h5>
+                <ul class="list-unstyled mt-2">
+                    <li><i class="fas fa-envelope me-2" style="color: #FFC107;"></i> info@studybee.com</li>
+                    <li><i class="fas fa-phone-alt me-2" style="color: #FFC107;"></i> +123-456-7890</li>
+                    <li><i class="fas fa-map-marker-alt me-2" style="color: #FFC107;"></i> 123 Bee St, Learning City, Educationland</li>
+                </ul>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase fw-bold" style="color: #FFC107;">Follow Us</h5>
+                <div class="d-flex mt-3 gap-3 justify-content-center">
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-light fs-4 social-hover"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="bg-light my-4">
+    <div class="text-center">
+        <p class="mb-0" style="font-size: 1.1rem;">&copy; 2024 StudyBee. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- JavaScript for Social Icons Animation -->
+<script>
+    document.querySelectorAll('.fab').forEach(icon => {
+        icon.addEventListener('mouseover', function () {
+            this.style.transform = 'scale(1.3)';
+            this.style.transition = 'transform 0.3s ease-in-out';
+            this.style.color = '#FFC107';
+        });
+        icon.addEventListener('mouseout', function () {
+            this.style.transform = 'scale(1)';
+            this.style.color = '';
+        });
+    });
+
+    // Link hover effect for quick links
+    document.querySelectorAll('.link-hover').forEach(link => {
+        link.addEventListener('mouseover', function () {
+            this.style.color = '#FF6F00';
+            this.style.textDecoration = 'underline';
+        });
+        link.addEventListener('mouseout', function () {
+            this.style.color = '';
+            this.style.textDecoration = 'none';
+        });
+    });
+</script>
+
+<!-- Additional CSS for more vibrant styling -->
+<style>
+    footer {
+        background: linear-gradient(to bottom, #333, #000);
+        color: #ffffff;
+    }
+    footer h5 {
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    footer ul li {
+        margin-bottom: 10px;
+    }
+    .social-hover:hover {
+        color: #FF6F00 !important;
+    }
+
+    /* Responsive Footer Adjustments */
+    @media (max-width: 768px) {
+        footer .row {
+            text-align: center;
+        }
+        footer .col-lg-4, footer .col-lg-3, footer .col-lg-2 {
+            margin-bottom: 2rem;
+        }
+        footer .social-hover {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<script>
+    // Search Library Functionality
+    function searchLibrary() {
+        var input = document.getElementById('searchLibrary');
+        var filter = input.value.toUpperCase();
+        var materialList = document.getElementById('materialList');
+        var cards = materialList.getElementsByClassName('card');
+
+        for (var i = 0; i < cards.length; i++) {
+            var title = cards[i].getElementsByClassName('card-title')[0];
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+
+    // Set Modal Details
+    var modal = document.getElementById('materialDetailsModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var title = button.getAttribute('data-title');
+        var description = button.getAttribute('data-description');
+        var downloadLink = button.getAttribute('data-link');
+
+        var modalTitle = modal.querySelector('.modal-title');
+        var modalDescription = modal.querySelector('#materialDescription');
+        var modalDownload = modal.querySelector('#materialDownload');
+
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+        modalDownload.setAttribute('href', downloadLink);
+    });
+
+    // Scroll to Top Button Logic
+    var mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    };
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+
+</body>
+</html>
