@@ -1,0 +1,173 @@
+/* === Root Variables for Bee-Inspired Theme === */
+:root {
+    --bs-primary: #FFC107; /* Warm golden-yellow */
+    --bs-secondary: #212529; /* Deep black */
+    --bs-success: #28a745; /* Keep green for success */
+    --bs-info: #17a2b8; /* Light blue for info */
+    --bs-warning: #FFB300; /* Bright yellow-orange */
+    --bs-danger: #DC3545; /* Keep red for danger */
+    --bs-light: #F8F9FA; /* Soft white-gray */
+    --bs-dark: #343A40; /* Deep charcoal gray */
+}
+
+/* === Navbar Customizations === */
+.navbar {
+    background-color: var(--bs-secondary); /* Deep black */
+    color: var(--bs-light);
+}
+
+.navbar-brand {
+    color: var(--bs-primary) !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar-nav .nav-link {
+    color: var(--bs-light) !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--bs-primary) !important;
+}
+
+/* === Button Customizations === */
+.btn-primary {
+    background-color: var(--bs-primary); /* Golden yellow */
+    border-color: var(--bs-primary);
+    color: var(--bs-dark); /* Text: Black for contrast */
+}
+
+.btn-primary:hover {
+    background-color: #FFA000; /* Slightly darker shade */
+    border-color: #FF8F00;
+}
+
+.btn-secondary {
+    background-color: var(--bs-secondary); /* Deep black */
+    border-color: var(--bs-secondary);
+    color: var(--bs-light); /* Text: White */
+}
+
+.btn-secondary:hover {
+    background-color: #333333; /* Slightly lighter black */
+    border-color: #444444;
+}
+
+/* === Form Customizations === */
+.form-control {
+    border-radius: 0.25rem;
+    border: 1px solid var(--bs-secondary);
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary); /* Focus: Golden yellow */
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25); /* Subtle yellow glow */
+}
+
+/* === Table Customizations === */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+
+.table th {
+    background-color: var(--bs-secondary); /* Black background */
+    color: var(--bs-primary); /* Golden text */
+    text-transform: uppercase;
+}
+
+.table td {
+    background-color: var(--bs-light); /* White cells */
+    color: var(--bs-dark); /* Black text */
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--bs-warning); /* Highlight: Yellow */
+    color: var(--bs-dark);
+}
+
+/* === Footer Customizations === */
+footer {
+    background-color: var(--bs-secondary); /* Black */
+    color: var(--bs-light); /* White text */
+    text-align: center;
+    padding: 1rem 0;
+}
+
+footer a {
+    color: var(--bs-primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: var(--bs-warning);
+}
+
+/* === Custom Card Styling === */
+.card {
+    border: 1px solid var(--bs-secondary);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: var(--bs-primary); /* Yellow header */
+    color: var(--bs-dark); /* Black text */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-body {
+    color: var(--bs-secondary); /* Dark gray */
+    background-color: var(--bs-light); /* White */
+}
+
+/* === Utilities === */
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+.text-secondary {
+    color: var(--bs-secondary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--bs-secondary) !important;
+}
+
+/* === Bee-Themed Alerts === */
+.alert-primary {
+    background-color: var(--bs-warning); /* Bright yellow */
+    color: var(--bs-dark); /* Black text */
+    border-color: var(--bs-primary);
+}
+
+.alert-secondary {
+    background-color: var(--bs-secondary); /* Black background */
+    color: var(--bs-light); /* White text */
+    border-color: #444444;
+}
+
+/* === Miscellaneous === */
+.text-warning {
+    color: var(--bs-warning) !important;
+}
+
+.bg-warning {
+    background-color: var(--bs-warning) !important;
+}
+
+.text-light {
+    color: var(--bs-light) !important;
+}
+
+.bg-light {
+    background-color: var(--bs-light) !important;
+}
